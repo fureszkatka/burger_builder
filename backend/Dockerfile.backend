@@ -1,0 +1,6 @@
+FROM node:19
+WORKDIR /Burger_Builder
+COPY package.json package.json
+RUN yarn
+COPY . .
+CMD yarn run nodemon app.js
