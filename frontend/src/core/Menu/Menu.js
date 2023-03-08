@@ -5,17 +5,21 @@ class Menu extends Component {
     render() {
         return (
             <div className="Menu_content">
-                <div className ="Menu_left">
+                <div style={{display:"flex", flexDirection:"row",justifyContent:"flex-end"}}><div style={{width:"80%",height:2,backgroundColor:"white"}}></div></div>
+                <div style={{display: "flex", flexDirection:"row"}}>
+                    <div className ="Menu_left">
+                        <div className = "Menu_profile">
+                            <Link className="Menu_home-link" to ="/"><img className="Menu_home-image" src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"></img>KateBurger</Link>
+                        </div>
+                        <div className = "Menu_makeBurger">
+                            <Link className="Menu_home-link" to = "/makeburger">Let's Make a burger!</Link>
+                        </div>
+                    </div>
                     <div className = "Menu_profile">
-                        <Link to ="/">Home</Link>
-                    </div>
-                    <div className = "Menu_makeBurger">
-                        <Link to = "/makeburger">Let's Make a burger!</Link>
+                        <Link className="Menu_home-link" to = "/profile">Profile</Link>     
                     </div>
                 </div>
-                <div className = "Menu_profile">
-                    <Link to = "/profile">Profile</Link>     
-                </div>
+                <div style={{width:"80%",height:2,backgroundColor:"white"}}></div>
             </div>
         );
     }
