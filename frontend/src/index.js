@@ -7,6 +7,8 @@ import Menu from "./core/Menu/Menu"
 import MyProfile from './Pages/MyProfile/MyProfile';
 import MakeBurger from './Pages/MakeBurger/MakeBurger';
 import "./core/Menu/Menu.styl"
+import { store } from "./redux-store"
+import {Provider} from "react-redux"
 
 const root = document.getElementById("root")
 
@@ -30,6 +32,8 @@ class App extends Component {
 }
 
 ReactDOM.render(
-    <App/>,
+    <Provider store = {store}>
+        <App/>
+    </Provider>,
     root
 )
