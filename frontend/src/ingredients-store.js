@@ -14,7 +14,9 @@ export const Ingredients = createSlice({
         }),
         remove: (state,i) =>{
             ingredients: state.ingredients.filter((index) => i != index)
-            console.log(state.ingredients)
+        },
+        list: (state) =>{
+            return state.ingredients
         }
     }
 })

@@ -16,7 +16,7 @@ const root = document.getElementById("root")
 class App extends Component {
     render() {
         return (
-            <div>
+            <>
                 <BrowserRouter>
                 <Menu className="Menu_container"></Menu>
                     <Routes>
@@ -26,7 +26,7 @@ class App extends Component {
                         <Route path="*" element={<NoPage />}/>
                     </Routes>
                 </BrowserRouter>
-            </div>
+            </>
         );
     }
 }
