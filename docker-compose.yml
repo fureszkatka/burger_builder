@@ -1,18 +1,19 @@
 version: '3'
 services:
-  backend:
-    build:
-      context: backend
-      dockerfile: Dockerfile.backend
+  db:
     ports:
-      - 5000:5000
-    restart: always
+      - 3306:3306
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: koko
+      MYSQL_DATABASE: my_burger
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports: 
+      - 8081:80
+    environment:
+      - PMA_HOST=db
 
-  frontend:
-    build:
-      context: frontend
-      dockerfile: Dockerfile.frontend
-    ports:
-      - 8080:8080
-    restart: always
-    
