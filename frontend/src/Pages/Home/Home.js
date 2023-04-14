@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import "./Home.styl"
 
 class Home extends Component {
     render() {
         return (
                 <div className = "Home_container">
+                    If You'd like to make your own burger please log in, or if you don't have an account you can easily make one by clicking this link --Đ
+                    <Link to= "/signup">Signup</Link>
                     <div className ="Home_left-side">
                         <div className="Home_body">
                             What is Lorem Ipsum?
