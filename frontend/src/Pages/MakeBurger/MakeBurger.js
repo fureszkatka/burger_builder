@@ -12,7 +12,6 @@ const MakeBurger = () => {
     const dispatch = useDispatch()
 
     const upload = () =>{
-        console.log("hey")
         let ingredients = Ingredients.map((ing) =>(ing.payload))
         console.log(ingredients)
         addIngredient(ingredients)

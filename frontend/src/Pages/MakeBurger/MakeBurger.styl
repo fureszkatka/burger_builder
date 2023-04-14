@@ -14,6 +14,7 @@ body
     align-items: center
     transition: 0.5s
     margin: 0px
+    width: 100%
     @media only screen and (max-width:1000px )
         align-items: center
         justify-content: center
@@ -29,14 +30,14 @@ body
     flex-direction: column
     align-items: center
     opacity 0.7
-    background-image: url("C:\Users\Kató\Asztal\burger_builder\Used_images\bookpage.jpg")
+    background-image: url("..\Used_images\bookpage.jpg")
     background-size: cover
     background-position: center
     position: relative
     transition: 0.5s
     @media only screen and (max-width:1000px )
         transition: 0.5s
-        background-image: url("C:\Users\Kató\Asztal\burger_builder\Used_images\bookpage.jpg")
+        background-image: url("..\Used_images\bookpage.jpg")
         padding: 0px
         width: 100%
 
@@ -61,6 +62,7 @@ body
     display: flex
     flex-direction: row
     width: 100%
+    height: fit-content
     padding-left:100px
     padding-right:100px
     color: black
@@ -70,21 +72,23 @@ body
         flex-direction: column
         transition: 0.5s
         width: 100%
-        height: fit-content
+        height: 900px
         align-items: center 
         padding: 20px
-        justify-content: space-evenly
 
 
 .MakeBurger_left
     display: flex
+    justify-content: center
     flex-direction: column
     width: 300px
+    height: 300px
     margin-right: 50px 
     @media only screen and (max-width:1000px )
         margin-right: 0px
         margin-top: 20px
         margin-bottom: 50px
+        height: 300px
 
 .MakeBurger_instruction
     display: flex
@@ -96,7 +100,7 @@ body
     display: flex
     flex-direction: row
     width: 260px
-    background-image: url("C:\Users\Kató\Asztal\burger_builder\Used_images\plank.png")
+    background-image: url("..\Used_images\plank.png")
     padding: 10px
     justify-content: space-between
     align-items: center
@@ -104,20 +108,23 @@ body
 
 .MakeBurger_right
     display: flex
-    height: 600px
-    width: 300px
+    height: fit-content
+    width: 400px
+    height: 300px
+    overflow: auto
+    align-items: center
     flex-direction: column
     @media only screen and (max-width: 1000px)
         flex-direction: column
         justify-content: center
         margin-top: 30px
-        height: fit-content
+        
     
     
 .MakeBurger_bun-top
     display: flex
     flex-direction: row
-    background-image: url('C:\Users\Kató\Asztal\burger_builder\Used_images\buntop.jpeg')
+    background-image: url('..\Used_images\buntop.jpeg')
     background-size: cover
     height: 100px
     width: 300px
@@ -131,7 +138,7 @@ body
     flex-direction: row
     height: 40px
     width: 300px
-    background-image: url('C:\Users\Kató\Asztal\burger_builder\Used_images\bunbottom.jpg')
+    background-image: url('..\Used_images\bunbottom.jpg')
     background-size: cover
     height: 40px
     border-bottom-left-radius: 20px 
@@ -143,7 +150,7 @@ body
     width: 300px
 
 .MakeBurger_cucumber
-    background-image: url('C:\Users\Kató\Asztal\burger_builder\Used_images\cucumber.jpg')
+    background-image: url('..\Used_images\cucumber.jpg')
     background-size: cover
     width: 150px
     height: 20px
@@ -161,7 +168,7 @@ body
     width: 300px
 
 .MakeBurger_tomato
-    background-image: url('C:\Users\Kató\Asztal\burger_builder\Used_images\tomato.jpg')
+    background-image: url('..\Used_images\tomato.jpg')
     width: 200px
     height: 30px
     border-radius: 15px
@@ -172,7 +179,7 @@ body
     color: rgb(250, 163, 163)
 
 .MakeBurger_cheese
-    background-image: url('C:\Users\Kató\Asztal\burger_builder\Used_images\cheese.jpg')
+    background-image: url('..\Used_images\cheese.jpg')
     width: 300px
     height: 20px
     border-radius: 15px
