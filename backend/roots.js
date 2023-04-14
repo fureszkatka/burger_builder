@@ -1,8 +1,8 @@
 const express = require("express")
 const addIngredients = require("./addIngredients")
 
-const router = express.Router()
+const router = express()
 
-router.post("/addingredient", addIngredients)
+router.post("/api/addingredient", addIngredients.addIngredients)
 
 module.exports = router
