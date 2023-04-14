@@ -3,7 +3,8 @@ import ReactDOM from "react-dom"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home"
 import NoPage from "./Pages/NoPage"
-import Menu from "./core/Menu/Menu" 
+import Menu from "./core/Menu/Menu"
+import { Signup } from './Pages/Signup/Signup'; 
 import MyProfile from './Pages/MyProfile/MyProfile';
 import MakeBurger from './Pages/MakeBurger/MakeBurger';
 import "./core/Menu/Menu.styl"
@@ -21,6 +22,7 @@ class App extends Component {
                 <Menu className="Menu_container"></Menu>
                     <Routes>
                         <Route index element={<Home />} />
+                        <Route path="/signup" element={<Signup/>}/>
                         <Route path="/profile" element={<MyProfile />}/>
                         <Route path="/makeburger" element={<MakeBurger/>}/>
                         <Route path="*" element={<NoPage />}/>

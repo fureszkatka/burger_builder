@@ -11,6 +11,10 @@ class Menu extends Component {
                         <div className = "Menu_profile">
                             <Link className="Menu_home-link" to ="/"><img className="Menu_home-image" src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"></img>KateBurger</Link>
                         </div>
+                        <div>
+                            login
+                            <Link to= "/signup">Signup</Link>
+                        </div>
                         <div className = "Menu_makeBurger">
                             <Link className="Menu_home-link" to = "/makeburger">Order</Link>
                         </div>

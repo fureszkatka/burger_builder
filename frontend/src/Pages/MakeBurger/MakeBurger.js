@@ -1,8 +1,8 @@
 import React, { Component, useState } from 'react';
 import "./MakeBurger.styl"
 import { useSelector, useDispatch } from 'react-redux'
-import { add, remove } from '../../ingredients-store'
-import {addIngredient} from "../../ingredientRoot"
+import { add, remove } from '../../stores/ingredients-store'
+import {addIngredient} from "../../Requests/burger"
 
 
 

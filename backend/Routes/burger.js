@@ -1,5 +1,5 @@
 const express = require("express")
-const addIngredients = require("./addIngredients")
+const addIngredients = require("../Controllers/burger")
 
 const router = express()
 
