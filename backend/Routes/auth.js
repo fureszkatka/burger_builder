@@ -1,9 +1,9 @@
 const express = require("express")
-const {userSignupValidator} = require("../validator")
-const {addUser,signin,signout} = require("../controllers/auth")
+const validator = require("../validator")
+const addUser = require("../Controllers/auth.js")
 
 const router = express()
 
-router.post("/signup", userSignupValidator, addUser)
+router.post("/api/signup", validator.userSignupValidator, addUser.addUser)
 
 module.exports = router

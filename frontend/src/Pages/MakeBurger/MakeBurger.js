@@ -11,10 +11,15 @@ const MakeBurger = () => {
     const Ingredients = useSelector((state) => state.ingredients.ingredients)
     const dispatch = useDispatch()
 
+    
+
     const upload = () =>{
         let ingredients = Ingredients.map((ing) =>(ing.payload))
         console.log(ingredients)
         addIngredient(ingredients)
+        .then(response => {
+            console.log(response.data)
+        })
     }
 
     const ingredients = (ing) =>{

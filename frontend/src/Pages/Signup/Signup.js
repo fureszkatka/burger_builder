@@ -1,36 +1,24 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { signup, remove, list, handleName, handleEmail, handlePassword } from '../../stores/signup-store'
-import {signupUser} from "../../Auth/index"
+import { signupUser, clear, list, handleName, handleEmail, handlePassword } from '../../stores/signup-store'
+import {signup} from "../../Requests/auth"
 
-export const Signup = () => {
+export const SignupNewUser = () => {
 
     const Users = useSelector((state) => state.users.userData)
     const dispatch = useDispatch()
     
-    console.log(Users)
 
-
-    const signup = () =>{
+    const Upload = () =>{
         const user = {
             name: Users.name,
             email: Users.email,
             password: Users.password
         }
         console.log(user)
-        signupUser(user)
-        .then(data =>{
-            console.log(data)
-            if(data.error) {
-                console.log(data.error)
-            }
-            else ()=>dispatch(signup({
-                message: "Signup successful",
-                name: "",
-                email: "",
-                password: "",
-                signin: true 
-            }))
+        signup(user)
+        .then(response =>{
+            console.log(response.error)
         })
     }
 
@@ -55,7 +43,9 @@ export const Signup = () => {
                 value={Users.password} 
                 onChange={(e)=>dispatch(handlePassword(e.target.value))}
             ></input>
-            <button onClick = {signup}>Signup</button>
+            <button onClick = {Upload}>Signup</button>
+
+            <div>{Users.message ? Users.userData.message : <p></p>}</div>
         </div>
     )
 }
