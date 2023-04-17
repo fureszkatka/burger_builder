@@ -23,25 +23,31 @@ const Users = sequelize.define('Users', {
 
 exports.addUser = async(req,res) =>{
 
-    await sequelize.sync();
-
-    const userExists = await Users.findOne({
-        email: req.body.email
-    })
-    if(userExists){
-        res.status(403).json({
-            error: "eamil is taken!"
-        })
+    if(res.error){
+        res.send({error:res.error })
     }
     else{
-        const user = await Users.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password            
-        })
+        await sequelize.sync();
 
-        res.status(200).json({
-            message: "signup success"
+        const userExists = await Users.findOne({
+            email: req.body.email
         })
+        if(userExists){
+            res.status(403).json({
+                error: "eamil is taken!"
+            })
+        }
+        else{
+            const user = await Users.create({
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password            
+            })
+
+            res.status(200).json({
+                message: "signup success"
+            })
+        }
     }
+    
 }
