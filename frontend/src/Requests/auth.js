@@ -6,8 +6,10 @@ export const signup = (userData) =>{
                 'content-type': 'application/json',
             },
             body: JSON.stringify(userData)
-    }).then(response => {
+    }).then(response =>{
         return response.json()
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        return err
+    })
 }

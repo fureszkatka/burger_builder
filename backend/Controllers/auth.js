@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const Sequelize = require("sequelize")
 
 
@@ -12,6 +13,7 @@ const Users = sequelize.define('Users', {
     },
     email: {
         type: Sequelize.DataTypes.STRING,
+        unique: true
     },
     password: {
         type: Sequelize.DataTypes.STRING,
@@ -22,18 +24,18 @@ const Users = sequelize.define('Users', {
 });
 
 exports.addUser = async(req,res) =>{
+ 
+    console.log(req)
 
     if(res.error){
-        res.send({error:res.error })
+        res.status(400).json({error:res.error })
     }
     else{
         await sequelize.sync();
 
-        const userExists = await Users.findOne({
-            email: req.body.email
-        })
+        const userExists = await Users.findOne({ where: { email: req.body.email } })
         if(userExists){
-            res.status(403).json({
+            return res.status(403).json({
                 error: "eamil is taken!"
             })
         }
@@ -44,7 +46,7 @@ exports.addUser = async(req,res) =>{
                 password: req.body.password            
             })
 
-            res.status(200).json({
+            return res.status(200).json({
                 message: "signup success"
             })
         }
