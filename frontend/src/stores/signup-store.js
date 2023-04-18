@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 let initialState = {
-    users: [],
+    allUsers: [],
     userData: {
-        name:"",
-        password:"",
-        email:"",
-        message:""
+        name: "",
+        password: "",
+        email: "",
+        message: ""
     }
 }
 
@@ -16,11 +16,11 @@ export const Users = createSlice({
     initialState,
     reducers: {
         signupUser: (state,newUser) => ({
-            users: [...state.users, {
-                name: newUser.name, 
-                password: newUser.password, 
-                email:newUser.email,
-                message: "signup successfull!"
+            allUsers: [...state.allUsers, {
+                name: newUser.payload.name, 
+                password: newUser.payload.password, 
+                email: newUser.payload.email,
+                message: newUser.payload.message
             }]
         }),
         handleName: (state,e) => ({
@@ -32,20 +32,12 @@ export const Users = createSlice({
         handlePassword: (state,e) => ({
             userData: {...state.userData, password: e.payload}
         }),
-        clear: (state) =>({
-            usersData: {
-                name: "",
-                email: "",
-                password: "",
-                message: ["email is taken","Please fill all the boxes!"] 
-            }
-        }),
-        list: (state) =>{
-            return state.users
-        }
+        clearing: (state, error) =>({
+            userData: {...state.userData, message: error.payload}
+        })
     }
 })
 
-export const {signupUser, clear, list, handleName, handleEmail, handlePassword} = Users.actions
+export const {signupUser, clearing, list, handleName, handleEmail, handlePassword} = Users.actions
 
 export default Users.reducer
