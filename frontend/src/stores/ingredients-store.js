@@ -12,15 +12,15 @@ export const Ingredients = createSlice({
         add: (state,val) => ({
             ingredients: [...state.ingredients, val]
         }),
-        remove: (state,i) =>{
-            ingredients: state.ingredients.filter((index) => i != index)
-        },
         list: (state) =>{
             return state.ingredients
-        }
+        },
+        clear: (state) => ({
+            ingredients: []
+        })
     }
 })
 
-export const {add, remove} = Ingredients.actions
+export const {add, clear} = Ingredients.actions
 
 export default Ingredients.reducer

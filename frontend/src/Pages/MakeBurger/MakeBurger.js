@@ -1,25 +1,34 @@
 import React, { Component, useState } from 'react';
 import "./MakeBurger.styl"
 import { useSelector, useDispatch } from 'react-redux'
-import { add, remove } from '../../stores/ingredients-store'
+import { add, clear } from '../../stores/ingredients-store'
 import {addIngredient} from "../../Requests/burger"
+import { isAuthenticated } from '../../Auth';
+import { Navigate } from 'react-router';
 
 
 
-const MakeBurger = () => {
+export const MakeBurger = () => {
 
     const Ingredients = useSelector((state) => state.ingredients.ingredients)
     const dispatch = useDispatch()
-
     
 
     const upload = () =>{
         let ingredients = Ingredients.map((ing) =>(ing.payload))
         console.log(ingredients)
-        addIngredient(ingredients)
-        .then(response => {
-            console.log(response.data)
-        })
+        if (isAuthenticated()) {
+            addIngredient(ingredients, isAuthenticated().user.id)
+            .then(data =>{
+                if(data.error){
+                    console.log(data.error)
+                }
+                else {
+                    () => dispatch(clear())
+                    console.log(data)
+                }
+            })   
+        }
     }
 
     const ingredients = (ing) =>{
@@ -59,6 +68,7 @@ const MakeBurger = () => {
 
     return (
         <div className="MakeBurger_container">
+            {!isAuthenticated() && <Navigate to ={`/login`}/>}
             <div className="MakeBurger_background">
             </div>
             
@@ -68,15 +78,15 @@ const MakeBurger = () => {
                         <p className="MakeBurger_instruction" style={{marginTop:0, width: "100%"}}>Please select your burger ingredients, by clicking the plus buttons next to the ingredient names</p>
                             <div className="MakeBurger_choosables">
                                 cucumber
-                                <button style={{backgroundColor:"black", color:"green"}} onClick={() =>dispatch(add("cucumber"))}>+</button>
+                                <button style={{backgroundColor:"black", color:"green", fontSize:25}} onClick={() =>dispatch(add("cucumber"))}>+</button>
                             </div>
                             <div className="MakeBurger_choosables">
                                 tomato
-                                <button style={{backgroundColor:"black", color:"red"}} onClick={() =>dispatch(add("tomato"))}>+</button>
+                                <button style={{backgroundColor:"black", color:"red", fontSize:25}} onClick={() =>dispatch(add("tomato"))}>+</button>
                             </div>
                             <div className="MakeBurger_choosables">
                                 cheese
-                                <button style={{backgroundColor:"black", color:"yellow"}} onClick={() =>dispatch(add("cheese"))}>+</button>
+                                <button style={{backgroundColor:"black", color:"yellow", fontSize:25}} onClick={() =>dispatch(add("cheese"))}>+</button>
                             </div>
                     </div>
 
@@ -110,4 +120,3 @@ const MakeBurger = () => {
 
 
 
-export default MakeBurger;

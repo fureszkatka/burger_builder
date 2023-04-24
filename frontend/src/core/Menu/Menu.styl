@@ -1,43 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Smokum&family=Syne+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Smokum&family=Syne+Mono&display=swap');
+
+
+
 .Menu_container
     display: flex
-    padding: 10px
-    top: 0px
-
+    margin: 0px
+    align-itmes: center
+    height: 1000px
+    width: 100%
 
 .Menu_content
     display: flex
-    flex-direction: column
-    padding: 10px
-    margin: 10px
-    border-radius: 10px
+    flex-direction: row
     font-size: 25px
     @media only screen and (max-width:1000px )
-        width: fit-content
+        align-items: center
 
-
-.Menu_left
+.Menu_items
     display: flex
     flex-direction: row
     flex-grow: 1
     align-items: center
+    margin: 10px
     transition: 0.5s
     @media only screen and (max-width:1000px )
-        flex-direction: column
         transition: 0.5s
-
-.Menu_right
-    display: flex
-    flex-direction: row
-    transition: 0.5s
-    @media only screen and (max-width:1000px )
-        flex-direction: column
-        align-items: center
-        transition: 0.5s
-
-.Menu_home-image
-    width: 40px
-    height: 40px
-    margin-right: 5px
 
 .Menu_home-link
     display: flex
@@ -45,12 +33,65 @@
     text-decoration: none
     color: rgb(253, 228, 228)
     font-size: 50px
-    margin-right: 20px
+    margin: 10px
     @media only screen and (max-width:1000px )
         width: fit-content
+        font-size: 15px
         
 
 .Menu_home-link:hover
+    color: rgb(0, 0, 0)
+    text-shadow: 2px 2px 5px rgba(255, 255, 0, 0.568)
+
+.Menu_makeBurger-link
+    display: flex
+    align-items:center
+    text-decoration: none
+    color: rgb(253, 228, 228)
+    font-size: 50px
+    margin: 10px
+    @media only screen and (max-width:1000px )
+        width: fit-content
+        font-size: 15px
+
+.Menu_makeBurger-link:hover
+    color: rgb(0, 0, 0)
+    text-shadow: 2px 2px 5px rgba(255, 255, 0, 0.568)
+
+
+.Menu_login-signup
+    display: flex
+    flex-direction: row
+    @media only screen and (max-width:1000px )
+        align-items: center
+
+.Menu_login-link
+    display: flex
+    align-items:center
+    text-decoration: none
+    color: rgb(253, 228, 228)
+    font-size: 50px
+    margin: 10px
+    @media only screen and (max-width:1000px )
+        width: fit-content
+        font-size: 15px
+
+.Menu_login-link.isActive
+    color: rgb(0, 0, 0)
+    text-shadow: 2px 2px 5px rgba(255, 255, 0, 0.568)
+
+.Menu_signup-link
+    display: flex
+    align-items:center
+    text-decoration: none
+    color: rgb(253, 228, 228)
+    font-size: 50px
+    margin: 10px
+    @media only screen and (max-width:1000px )
+        width: fit-content
+        font-size: 15px
+
+.Menu_signup-link:hover
     color: rgb(0, 0, 0)
     text-shadow: 2px 2px 5px rgba(255, 255, 0, 0.568)
 
@@ -59,7 +100,21 @@
     display: flex
     flex-direction: row
     align-items: center
-    margin-right: 10px
+
+.Menu_profile-link
+    display: flex
+    align-items:center
+    text-decoration: none
+    color: rgb(253, 228, 228)
+    font-size: 50px
+    margin: 10px
+    @media only screen and (max-width:1000px )
+        width: fit-content
+        font-size: 15px
+
+.Menu_profile-link:hover
+    color: rgb(0, 0, 0)
+    text-shadow: 2px 2px 5px rgba(255, 255, 0, 0.568)
 
 .Menu_makeBurger
     color: green
@@ -69,3 +124,22 @@
     justify-content: center
     margin: 5px
     
+
+
+.Menu_signout-link
+    display: flex
+    align-items:center
+    background-color: transparent
+    border: none
+    color: rgb(253, 228, 228)
+    font-size: 50px
+    margin: 10px
+    font-family: 'Smokum', cursive;
+    @media only screen and (max-width:1000px )
+        width: fit-content
+        font-size: 15px    
+
+
+.Menu_signout-link:hover
+    color: rgb(0, 0, 0)
+    text-shadow: 2px 2px 5px rgba(255, 255, 0, 0.568)

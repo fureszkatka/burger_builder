@@ -1,11 +1,10 @@
-export const addIngredient = (ingredient, userId) =>{
+export const addIngredient = (ingredient,userId) =>{
     return fetch(`/api/addingredient`, {
-        method: "POST",
+        method: "GET",
             headers: {
                 Accept: "application/json",
                 'content-type': 'application/json',
-            },
-        body: JSON.stringify({ ingredient, userId })
+            }
     }).then(response =>{
         return response.json()
     })
