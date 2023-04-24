@@ -1,11 +1,11 @@
-.Signup_container
+.Login_container
     display: flex
     flex-direction: column
     width: 400px
     height: 600px
     margin: 100px
 
-.Signup_background
+.Login_background
     display: flex 
     flex-direction: column
     position: absolute
@@ -17,7 +17,7 @@
     opacity: 0.5
 
 
-.Signup_forms
+.Login_forms
     display: flex
     flex-direction: column
     align-items: center
@@ -26,7 +26,7 @@
     height: 100%
 
 
-.Signup_inputs
+.Login_inputs
     display: flex
     flex-direction: row
     justify-content: flex-start
@@ -37,7 +37,7 @@
     height: 60px
 
 
-.Signup_labels
+.Login_labels
     position: absolute
     display: flex
     height: 30px
@@ -50,7 +50,7 @@
 
     
 
-.Signup_input
+.Login_input
     position: absolute
     display: flex
     background: transparent
@@ -64,24 +64,25 @@
     transition: 0.5s
     flex-grow: 1
 
-.Signup_input:focus + .Signup_labels,.Signup_input:not([value=""]) + .Signup_labels
+.Login_input:focus + .Login_labels,.Login_input:not([value=""]) + .Login_labels
     color: rgb(183, 159, 1)
     font-size: 20px
     transition: 0.5s
     transform: translateY(-30px) translateX(5px) 
 
-.Signup_input:focus + .Signup_input,.Signup_input:not([value=""]) + .Signup_input
+.Login_input:focus + .Login_input,.Login_input:not([value=""]) + .Login_input
     border-bottom: solid 3px black
 
 
-.Signup_button-message
+.Login_button-message
     display: flex
     flex-direction: column
     width: 500px
+    height: 100px
     align-items: center
     margin: 10px
 
-.Signup_button
+.Login_button
     display: flex
     flex-direction: row
     justify-content: center
@@ -91,23 +92,13 @@
     width: 200px
     height: 30px
 
-.Signup_message
+.Login_message
     display: flex
-    margin: 5px
-    height: 50px
+    margin:10px
+    height: 100px
     color: rgb(0, 255, 119)
     text-shadow: 2px 2px 4px #f0e8e8;
 
-.Signup_message[value="signup success"] + .Signup_message,.Signup_message:not([value="signup success"]) + .Signup_message
+.Login_message[value="Login success"] + .Login_message ,.Login_message:not([value="Login success"]) + .Login_message
     color: red
 
-.Signup_login 
-    display: flex
-    flex-direction: row
-    justify-content: center
-    font-size: 25px
-    color: white
-    position: relative
-
-Link
-    color: white

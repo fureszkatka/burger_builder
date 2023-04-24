@@ -1,32 +1,76 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../../Auth';
+import { signout } from '../../Requests/auth';
+import "./Menu.styl"
 
-class Menu extends Component {
+export class Menu extends Component{
+    
+    signoutUser = () => {
+        signout()
+    }
+
     render() {
+        const isActive = (path) => {
+            if (this.props.location.pathname === path) return { color: "rgb(0, 0, 0)", textShadow: "2px 2px 5px rgba(255, 255, 0, 0.568)" }
+            else return { color: "white" }
+        }
+
         return (
             <div className="Menu_content">
-                <div style={{display:"flex", flexDirection:"row",justifyContent:"flex-end"}}><div style={{width:"80%",height:2,backgroundColor:"white"}}></div></div>
-                <div className='Menu_right'>
-                    <div className ="Menu_left">
-                        <div className = "Menu_profile">
-                            <Link className="Menu_home-link" to ="/"><img className="Menu_home-image" src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"></img>KateBurger</Link>
+                <div className="Menu_items">
+                    <Link
+                        style={isActive("/")}
+                        className="Menu_home-link"
+                        to="/">KateBurger
+                    </Link>
+                    
+                    {isAuthenticated() && (
+                        <Link
+                            style={isActive("/makeburger")}
+                            className="Menu_makeBurger-link"
+                            to="/makeburger">Order
+                        </Link>
+                    )}
+                    
+                    {!isAuthenticated() && (
+                        <div className="Menu_login-signup">
+                            <Link
+                                style={isActive("/login")}
+                                className='Menu_login-link'
+                                to="/login">login
+                            </Link>
+                            <Link
+                                style={isActive("/signup")}
+                                className='Menu_signup-link'
+                                to="/signup">Signup
+                            </Link>
                         </div>
-                        <div>
-                            login
-                            <Link to= "/signup">Signup</Link>
-                        </div>
-                        <div className = "Menu_makeBurger">
-                            <Link className="Menu_home-link" to = "/makeburger">Order</Link>
-                        </div>
-                    </div>
-                    <div className = "Menu_profile">
-                        <Link className="Menu_home-link" to = "/profile">Profile</Link>     
-                    </div>
+                    )}
                 </div>
-                <div style={{width:"80%",height:2,backgroundColor:"white"}}></div>
+                {isAuthenticated() && (
+                    <button
+                        className='Menu_signout-link'
+                        onClick={() => signout(() => this.props.navigate("/"))}>
+                        Signout
+                    </button>
+                )}
+                {isAuthenticated() && (
+                    <Link
+                        className="Menu_profile-link"
+                        to={`/user/${isAuthenticated().user.id}`}>Profile
+                    </Link>
+                )}
             </div>
         );
     }
 }
 
-export default Menu;
+const MenuWithLocation =(props)=>{
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    return <Menu location={location} navigate={navigate} {...props}/>
+}
+
+export default MenuWithLocation
