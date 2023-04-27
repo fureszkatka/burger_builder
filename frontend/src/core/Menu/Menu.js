@@ -58,7 +58,7 @@ export class Menu extends Component{
                 {isAuthenticated() && (
                     <Link
                         className="Menu_profile-link"
-                        to={`/user/${isAuthenticated().user.id}`}>Profile
+                        to={`/user/${isAuthenticated().user.id}`}>My burgers
                     </Link>
                 )}
             </div>

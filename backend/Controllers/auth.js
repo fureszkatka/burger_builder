@@ -86,5 +86,14 @@ exports.signout = (req,res) =>{
 exports.requireSignin = jwt({
     secret: "FDSHJFGSFDVDAGFDGSFDSFSDSREFDV",
     algorithms: ["HS256"],
-    userProperty: "auth"
+    getToken: (req) => req.cookies["burger-token"]
 })
+
+exports.userById = (req, res, next, id) => {
+    
+    const user = Users.findOne({ where:{ id: id }})
+    if(user){
+        req.profile = user 
+        next()
+    }
+}

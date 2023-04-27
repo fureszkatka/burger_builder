@@ -13,3 +13,18 @@ export const addIngredient = (ingredient, userId) =>{
         return err
     })
 }
+
+export const getAllBurgers = (userId) =>{
+    return fetch(`/api/allburgers/${userId}`, {
+        method: "GET",
+            headers: {
+                Accept: "application/json",
+                'content-type': 'application/json',
+        },
+    }).then(response =>{
+        return response.json()
+    })
+    .catch(err => {
+        return err
+    })
+}
