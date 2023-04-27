@@ -38,12 +38,13 @@ export const login = (user) =>{
 export const signout = (nav) =>{
 
     if(typeof window !== "undefined") localStorage.removeItem("jwt")
-    nav()
+    
     return fetch("/api/signout", {
         method: "GET"
     })
         .then(response => {
             console.log("signout", response)
+            nav()
             return response.json()
         })
         .catch(err => {

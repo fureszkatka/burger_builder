@@ -9,7 +9,7 @@ import { MakeBurger } from './Pages/MakeBurger/MakeBurger';
 import { LoginUser } from './Pages/Login/Login'
 import { store } from "./redux-store"
 import { Provider } from "react-redux"
-import { UserPage } from './Pages/UserPage/UserPage';
+import {UserPage}  from './Pages/UserPage/UserPage';
 import "./core/Menu/Menu.styl"
 
 

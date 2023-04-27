@@ -7,7 +7,7 @@ const sequelize = new Sequelize('my_burger', 'root', 'koko', {
 });
 
 const Ingredients = sequelize.define('Ingredients', {
-    belog_to_user: {
+    belong_to_user: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false
     },
@@ -29,25 +29,54 @@ exports.addIngredients = async(req,res) =>{
 
     await sequelize.sync();
     burger_number += 1
-    let userId = req.body.userId
-    
-    for(i = 0;i < req.body.ingredient.length; i++){
+    if (req.body.ingredient.length > 0) {
+        for (i = 0; i < req.body.ingredient.length; i++) {
+            
+            console.log(req.body.ingredient[i])
 
-        console.log("userid: ----->", typeof(req.body.userId))
-
-        const ingredient = await Ingredients.create({
-            belong_to_user: userId,
-            ingredient: req.body.ingredient[i],
-            burger_id: burger_number,
-        })
+            const ingredient = await Ingredients.create({
+                belong_to_user: req.body.userId,
+                ingredient: req.body.ingredient[i],
+                burger_id: burger_number,
+            })
+        }
         
         return res.status(200).json({
             message: "Burger has been saved!"
+        })
+    }
+    else {
+        return res.json({
+            error: "Please fill up your burger with some ingredient!"
         })
     }
 
 }
 
 exports.getBurgers = async (req, res) => {
-    return "hey"
+    
+    let burgers = await Ingredients.findAll({ where: { belong_to_user: req.params.userId } })
+    if (!burgers) {
+        return res.json({error: "No burger was found!"})
+    }
+
+    let refakt_burger = []
+    let n = burgers[0].burger_id
+    let i = 0
+    let row = []
+
+    while (i < burgers.length) {
+        if(burgers[i].burger_id == n)  {
+            row.push(burgers[i].ingredient)
+            i++
+        }else{
+        console.log(i)
+        n = burgers[i].burger_id
+        refakt_burger.push(row)
+        row = []}
+    }
+    refakt_burger.push(row)
+
+    return res.json({burgers: refakt_burger, ingredients: burgers})
 }
+

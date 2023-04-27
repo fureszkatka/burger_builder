@@ -1,10 +1,13 @@
 const express = require("express")
-const { requireSignin } = require("../Controllers/auth")
+const { requireSignin, userById } = require("../Controllers/auth")
 const { addIngredients, getBurgers } = require("../Controllers/burger")
 
 const router = express()
 
 router.post("/api/addingredient", addIngredients)
-router.post("/api/allburgers", requireSignin, getBurgers)
+router.get("/api/allburgers/:userId", requireSignin, getBurgers)
+
+router.param("userId", userById)
+
 
 module.exports = router

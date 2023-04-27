@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 let initialState = {
     ingredients: [],
+    message: "",
+    burgers: []
 }
 
 export const Ingredients = createSlice({
@@ -10,17 +12,22 @@ export const Ingredients = createSlice({
     initialState,
     reducers: {
         add: (state,val) => ({
-            ingredients: [...state.ingredients, val]
+            ingredients: [...state.ingredients, val.payload]
         }),
-        list: (state) =>{
-            return state.ingredients
-        },
-        clear: (state) => ({
-            ingredients: []
+        clear: (state,message) =>({
+            ingredients: [],
+            message: message.payload
+        }),
+        uploadBurger: (state, message) => ({
+            message: message.payload,
+            ingredients: [],
+        }),
+        remove: (state,index) => ({
+            ingredients: state.ingredients.filter((ingredient,i) => i != index.payload)
         })
     }
 })
 
-export const {add, clear} = Ingredients.actions
+export const {add, uploadBurger, remove, clear} = Ingredients.actions
 
 export default Ingredients.reducer
