@@ -14,7 +14,6 @@ export const LoginUser = () => {
 
     const authenticate = (jwt)=>{
         if (typeof window !== "undefined") {
-            console.log(jwt)
             localStorage.setItem("jwt", JSON.stringify(jwt))
         }
     }
@@ -37,6 +36,7 @@ export const LoginUser = () => {
         })
 
     }
+
 
 
     const enterKeyDown = (e) =>{
