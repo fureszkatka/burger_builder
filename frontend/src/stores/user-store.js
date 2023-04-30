@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 let initialState = {
-    burgers: []
+    ingredients: "",
+    message: ""
 }
 
 export const UserBurgers = createSlice({
@@ -9,11 +10,15 @@ export const UserBurgers = createSlice({
     initialState,
     reducers: {
         list: (state,val) => ({
-            burgers: val.payload
+            ingredients: val.payload
+        }),
+        delOrder: (state,val,message) => ({
+            ingredients: state.ingredients.filter((burger, i) => i != val.payload),
+            message: "Burger deleted."
         })
     }
 })
 
-export const {list} = UserBurgers.actions
+export const {list,delOrder} = UserBurgers.actions
 
 export default UserBurgers.reducer

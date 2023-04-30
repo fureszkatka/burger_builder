@@ -60,23 +60,17 @@ exports.getBurgers = async (req, res) => {
         return res.json({error: "No burger was found!"})
     }
 
-    let refakt_burger = []
-    let n = burgers[0].burger_id
-    let i = 0
-    let row = []
 
-    while (i < burgers.length) {
-        if(burgers[i].burger_id == n)  {
-            row.push(burgers[i].ingredient)
-            i++
-        }else{
-        console.log(i)
-        n = burgers[i].burger_id
-        refakt_burger.push(row)
-        row = []}
-    }
-    refakt_burger.push(row)
 
-    return res.json({burgers: refakt_burger, ingredients: burgers})
+    return res.json({ingredients: burgers})
 }
 
+exports.deleteBurger = async (req, res) => { 
+
+    let deleteBurger = await Ingredients.destroy({
+        where: { belong_to_user: req.body.userId, burger_id: req.body.burgerId  },
+    });
+    return res.json({
+        message: `${req.body.burgerId} id burger has been removed!`
+    })
+}
