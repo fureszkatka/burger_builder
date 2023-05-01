@@ -1,16 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
-import { clearing, handleName, handleEmail, handlePassword } from '../../stores/signup-store'
+import { clearing, handleName, handleEmail, handlePassword, loading } from '../../stores/signup-store'
 import {signup} from "../../Requests/auth"
 import "./Signup.styl"
 
 export const SignupNewUser = () => {
 
+    //define the Redux store state to wok with
     const Users = useSelector((state) => state.users.userData)
     const dispatch = useDispatch()
     
-    const Upload = () =>{
+    //Upload the signup data to the request function with user data.
+    const Upload = () => {
+        
+        dispatch(loading(true))
+
         const user = {
             name: Users.name,
             email: Users.email,
@@ -22,13 +27,16 @@ export const SignupNewUser = () => {
         .then(data =>{
             if(data.error){
                 dispatch(clearing(data.error))
+                dispatch(loading(false))
             }
-            else{
+            else {
                 dispatch(clearing(data.message))
+                dispatch(loading(false))
             }
         })
     }
 
+    //Check if the message was error or not, for what color is going to be. 
     const isError = () => {
         if (Users.message != "Signup success!") {
             return (
@@ -42,6 +50,7 @@ export const SignupNewUser = () => {
         }
     }
 
+    //Activate the enter pressing sensor
     const enterKeyDown = (e) =>{
         if(e.keyCode === 13){
             Upload()
@@ -55,7 +64,7 @@ export const SignupNewUser = () => {
             </div>
             <div className="Signup_forms">
                 
-                <p>Signup</p>
+                <p className="Signup_title">Signup</p>
 
                 <div className="Signup_inputs">
                     <input 
@@ -93,9 +102,25 @@ export const SignupNewUser = () => {
                 
                 <div className="Signup_button-message">
                     <button className ="Signup_button" onClick = {Upload}>Signup</button>
-                    <p style={isError()} className ="Signup_message">{Users.message}</p>
+                    {Users.isLoading ?
+                        <img style={{ width: 40, height: 40 }}
+                            src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/04de2e31234507.564a1d23645bf.gif">
+                        </img>
+                        :
+                        <p
+                            style={isError()}
+                            className="Signup_message"
+                        >
+                            {Users.message}
+                        </p>}
                 </div>
-                <div className="Signup_login">You alredy have an account? Here you can sign in! -- <Link to ="/login">Login</Link></div>
+                <div
+                    className="Signup_login">
+                    You alredy have an account? Here you can sign in! --
+                    <Link to="/login">
+                        Login
+                    </Link>
+                </div>
             </div>
             
         </div>

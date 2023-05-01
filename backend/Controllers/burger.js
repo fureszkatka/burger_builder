@@ -1,11 +1,12 @@
 const Sequelize = require("sequelize")
 
-
+//Make connection with database
 const sequelize = new Sequelize('my_burger', 'root', 'koko', {
     host: 'localhost',
     dialect: 'mysql'
 });
 
+//Define the table and the rows for database
 const Ingredients = sequelize.define('Ingredients', {
     belong_to_user: {
         type: Sequelize.DataTypes.INTEGER,
@@ -23,8 +24,10 @@ const Ingredients = sequelize.define('Ingredients', {
     tableName: "Ingredients",modelName:"Ingredients"
 });
 
-
+//Define burger id
 let burger_number = 0
+
+//Upload ingredient
 exports.addIngredients = async(req,res) =>{
 
     await sequelize.sync();
@@ -53,18 +56,19 @@ exports.addIngredients = async(req,res) =>{
 
 }
 
+
+//Get burgers
 exports.getBurgers = async (req, res) => {
     
     let burgers = await Ingredients.findAll({ where: { belong_to_user: req.params.userId } })
     if (!burgers) {
         return res.json({error: "No burger was found!"})
     }
-
-
-
     return res.json({ingredients: burgers})
 }
 
+
+//Delete burger by id and owner id
 exports.deleteBurger = async (req, res) => { 
 
     let deleteBurger = await Ingredients.destroy({
