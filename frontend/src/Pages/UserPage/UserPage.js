@@ -22,6 +22,10 @@ export const UserPage = () => {
 
         getAllBurgers(userId)
             .then(data => {
+                if (data?.ingredients?.length == 0) {
+                    dispatch(loading(false))
+                    return;
+                }
 
                 let refakt_burger = []
                 let n = data.ingredients[0].burger_id

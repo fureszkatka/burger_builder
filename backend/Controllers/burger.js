@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize")
 
 //Make connection with database
-const sequelize = new Sequelize('my_burger', 'root', 'koko', {
+const sequelize = new Sequelize('my_burger', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql'
 });
@@ -24,14 +24,11 @@ const Ingredients = sequelize.define('Ingredients', {
     tableName: "Ingredients", modelName: "Ingredients"
 });
 
-//Define burger id
-let burger_number = 0
+Ingredients.sync();
 
 //Upload ingredient
 exports.addIngredients = async (req, res) => {
-
-    await sequelize.sync();
-    burger_number += 1
+    burger_number = parseInt(await Ingredients.max('burger_id')) + 1
     if (req.body.ingredient.length > 0) {
         for (i = 0; i < req.body.ingredient.length; i++) {
 
