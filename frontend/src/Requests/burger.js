@@ -1,4 +1,4 @@
-
+//Send request to upload ingredient
 export const addIngredient = (ingredient, userId) =>{
     return fetch(`/api/addingredient`, {
         method: "POST",
@@ -15,6 +15,8 @@ export const addIngredient = (ingredient, userId) =>{
     })
 }
 
+
+//Send request to get all burgers
 export const getAllBurgers = (userId) =>{
     return fetch(`/api/allburgers/${userId}`, {
         method: "GET",
@@ -30,6 +32,8 @@ export const getAllBurgers = (userId) =>{
     })
 }
 
+
+//Send request to delete specific burger
 export const delBurger = (userId,burgerId) =>{
     return fetch(`/api/deleteburger/${burgerId}`, {
         method: "DELETE",

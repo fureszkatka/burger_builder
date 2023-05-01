@@ -16,7 +16,7 @@ export const MakeBurger = () => {
 
     const upload = () =>{
         let ingredients = Ingredients.ingredients
-        console.log(ingredients)
+
         if (isAuthenticated()) {
             addIngredient(ingredients, isAuthenticated().user.id)
             .then(data =>{
@@ -76,24 +76,41 @@ export const MakeBurger = () => {
             <div className="MakeBurger_forms-button">
                 <div className="MakeBurger_forms">
                     <div className="MakeBurger_left">
-                        <p className="MakeBurger_instruction" style={{marginTop:0, width: "100%"}}>Please select your burger ingredients, by clicking the plus buttons next to the ingredient names</p>
+                        <p className="MakeBurger_instruction" style={{ marginTop: 0, width: "100%" }}>
+                            Please select your burger ingredients,
+                            by clicking the plus buttons next to the ingredient names
+                        </p>
                         <div className="MakeBurger_choosables">
                             cucumber
-                            <button style={{backgroundColor:"black", color:"green", fontSize:25}} onClick={() =>dispatch(add("cucumber"))}>+</button>
+                            <button
+                                style={{ backgroundColor: "black", color: "green", fontSize: 25 }}
+                                onClick={() => dispatch(add("cucumber"))}>
+                                +
+                            </button>
                         </div>
                         <div className="MakeBurger_choosables">
                             tomato
-                            <button style={{backgroundColor:"black", color:"red", fontSize:25}} onClick={() =>dispatch(add("tomato"))}>+</button>
+                            <button
+                                style={{ backgroundColor: "black", color: "red", fontSize: 25 }}
+                                onClick={() => dispatch(add("tomato"))}>
+                                +
+                            </button>
                         </div>
                         <div className="MakeBurger_choosables">
                             cheese
-                            <button style={{backgroundColor:"black", color:"yellow", fontSize:25}} onClick={() =>dispatch(add("cheese"))}>+</button>
+                            <button
+                                style={{ backgroundColor: "black", color: "yellow", fontSize: 25 }}
+                                onClick={() => dispatch(add("cheese"))}>
+                                +
+                            </button>
                         </div>
                     </div>
                     <div className="MakeBurger_right">
-                        <p style={{marginTop:0}}>Here is your burger! :)</p>
+                        <p style={{ marginTop: 0 }}>Here is your burger! :)</p>
+                        
                         <div className='MakeBurger_bun-top'></div>
-                        {Ingredients.ingredients.map((piece,index) =>(
+                        
+                        {Ingredients.ingredients.map((piece, index) => (
                             <div className='MakeBurge_mapIngredients' key = {index}>
                                 <div className='MakeBurger_ing-button'>
                                     <div className='MakeBurger_ing-container'>
@@ -110,8 +127,14 @@ export const MakeBurger = () => {
                         <div className='MakeBurger_bun-bottom'></div>
                     </div>
                 </div>
-                <button className='MakeBurger_apply-button' onClick={upload}>save and proceed to payment</button>
-                <div className='MakeBurger_message'>{Ingredients.message}</div>
+                <button
+                    className='MakeBurger_apply-button'
+                    onClick={upload}>
+                    save and proceed to payment
+                </button>
+                <div className='MakeBurger_message'>
+                    {Ingredients.message}
+                </div>
                 
             </div>
 

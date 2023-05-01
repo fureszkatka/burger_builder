@@ -3,11 +3,14 @@ const ejwt = require("jsonwebtoken")
 require('dotenv').config()
 var { expressjwt: jwt } = require("express-jwt");
 
+
+//Setup connection to database
 const sequelize = new Sequelize('my_burger', 'root', 'koko', {
     host: 'localhost',
     dialect: 'mysql'
 });
 
+//Define table and rows for databases
 const Users = sequelize.define('Users', {
    
     name: {
@@ -25,6 +28,7 @@ const Users = sequelize.define('Users', {
     tableName: "Users",modelName:"Users"
 });
 
+//Signup user
 exports.signup = async(req,res) =>{
  
     if(res.error){
@@ -54,7 +58,7 @@ exports.signup = async(req,res) =>{
     
 }
 
-
+//Login user
 exports.login = async (req, res) => {
 
     const { email, password } = req.body
@@ -68,6 +72,7 @@ exports.login = async (req, res) => {
         })
     }
     else {
+        //define token
         const token = ejwt.sign({ _id: userMatch.id }, "FDSHJFGSFDVDAGFDGSFDSFSDSREFDV")
 
         res.cookie("burger-token", token, { expire: new Date() + 9999 })
@@ -78,17 +83,21 @@ exports.login = async (req, res) => {
 
 }
 
+//Signout user
 exports.signout = (req,res) =>{
     res.clearCookie("burger-token")
     return res.json({message: "signout"})
 }
 
+
+//Check jwt token
 exports.requireSignin = jwt({
     secret: "FDSHJFGSFDVDAGFDGSFDSFSDSREFDV",
     algorithms: ["HS256"],
     getToken: (req) => req.cookies["burger-token"]
 })
 
+//Make profile based on the root parameter 
 exports.userById = (req, res, next, id) => {
     
     const user = Users.findOne({ where:{ id: id }})

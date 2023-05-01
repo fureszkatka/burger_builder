@@ -9,13 +9,15 @@
     display: flex 
     flex-direction: column
     position: absolute
-    background-color: rgb(51, 31, 31)
-    filter: blur(4px);
-    align-items: center
+    background-color: rgba(181, 125, 98, 0.34)
+    box-shadow: rgba(0, 0, 0, 0.56) 2px 22px 70px 4px;
     height: 600px
     width: 500px
-    opacity: 0.5
+    align-items: center
+    border-radius: 15px
 
+.Login_title
+    position: relative
 
 .Login_forms
     display: flex
@@ -88,17 +90,22 @@
     justify-content: center
     align-items: center
     position: relative
-    background-color: brown
+    background-color: rgb(56, 37, 4)
     width: 200px
-    height: 30px
+    height: 50px
+    border: none
+    font-size: 25px
+    color: white
+    box-shadow: rgba(0, 0, 0, 0.56) 2px 22px 40px 4px;
+
+.Login_button:hover
+    cursor: pointer
+
 
 .Login_message
     display: flex
-    margin:10px
-    height: 100px
-    color: rgb(0, 255, 119)
-    text-shadow: 2px 2px 4px #f0e8e8;
-
-.Login_message[value="Login success"] + .Login_message ,.Login_message:not([value="Login success"]) + .Login_message
-    color: red
+    margin: 5px
+    height: 50px
+    color: rgb(255, 0, 0)
+    text-shadow: 2px 2px 4px #000000;
 

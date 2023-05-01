@@ -1,4 +1,6 @@
-export const isAuthenticated = () =>{
+
+//Check if the jwt token is active for authentication
+export const isAuthenticated = () => {
     if(typeof window == "undefined"){
         return false
     }
@@ -10,3 +12,4 @@ export const isAuthenticated = () =>{
         return false
     }
 }
+

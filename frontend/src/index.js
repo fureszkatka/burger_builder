@@ -11,8 +11,9 @@ import { store } from "./redux-store"
 import { Provider } from "react-redux"
 import {UserPage}  from './Pages/UserPage/UserPage';
 import "./core/Menu/Menu.styl"
+import PrivateRoutes from './Auth/PrivateRoutes';
 
-
+//Make place for the App component in the index.html
 const root = document.getElementById("root")
 
 class App extends Component {
@@ -24,9 +25,9 @@ class App extends Component {
                     <Routes>
                         <Route index element={<Home />} />
                         <Route path="/signup" element={<SignupNewUser />} />
-                        <Route path="/user/:userId" element={<UserPage />} />
+                        <Route path="/user/:userId" element={<PrivateRoutes><UserPage /></PrivateRoutes>} />
                         <Route path="/login" element={<LoginUser/>}/>
-                        <Route path="/makeburger" element={<MakeBurger/>}/>
+                        <Route path="/makeburger" element={<PrivateRoutes><MakeBurger/></PrivateRoutes>}/>
                         <Route path="*" element={<NoPage />}/>
                     </Routes>
                 </BrowserRouter>
@@ -35,6 +36,7 @@ class App extends Component {
     }
 }
 
+//Rendering the component with Redux store
 ReactDOM.render(
     <Provider store = {store}>
         <App/>

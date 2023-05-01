@@ -1,7 +1,7 @@
 import React from "react";
 import { isAuthenticated } from "../../Auth";
 import { useSelector, useDispatch } from 'react-redux'
-import { list, delOrder} from '../../stores/user-store'
+import { list, delOrder, loading} from '../../stores/user-store'
 import { getAllBurgers,delBurger } from "../../Requests/burger"
 import { useEffect, useState } from "react";
 import "./UserPage.styl"
@@ -9,11 +9,16 @@ import "./UserPage.styl"
 
 export const UserPage = () => {
 
-    const Burgers = useSelector((state) => state.burger.ingredients)
+    //Define the Redux state to work with 
+    const Burgers = useSelector((state) => state.burger)
     const dispatch = useDispatch()
 
+
+    //Get the data from the database when the page has refreshed
     useEffect(() => {
         let userId = isAuthenticated().user.id
+
+        dispatch(loading(true))
 
         getAllBurgers(userId)
         .then(data => {
@@ -34,13 +39,14 @@ export const UserPage = () => {
             }
             refakt_burger.push(row)
 
+            dispatch(loading(false))
             dispatch(list(refakt_burger))
         })
 
 
     },[])
 
-
+    //Mapping a 2d array
     const MapBurgers = (item,i) => {
         
         return (
@@ -55,7 +61,7 @@ export const UserPage = () => {
     }
 
 
-
+    //Handle deleting a burger by id
     const deleteOrder = (i,index)=> {
         
         delBurger(isAuthenticated().user.id, index)
@@ -67,25 +73,35 @@ export const UserPage = () => {
     
     return(
         <div className="UserPage_container">
-            {Burgers &&
-                <div className="UserPage_burgers-list">
-                    {Burgers.map((burger, index) => (
-                        <div key={index} className="UserPage_button-burgers">
-                        
-                            <p className="UserPage_index">{burger[0].burger_id}</p>
-                            <div
-                                className="UserPage_list-items"
-                                >
-                                {MapBurgers(burger, index)}
-                            </div>
-                            <div
-                                className="material-symbols-outlined"
-                                onClick={() => deleteOrder(index,burger[0].burger_id)}>
-                                delete
-                            </div>
+            {Burgers.isLoading ?
+                <img
+                    src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/04de2e31234507.564a1d23645bf.gif"
+                >
+                </img>
+                :
+                <>
+                    {Burgers.ingredients &&
+                        <div className="UserPage_burgers-list">
+                            {Burgers.ingredients.map((burger, index) => (
+                                <div key={index} className="UserPage_button-burgers">
+                            
+                                    <p className="UserPage_index">
+                                        {burger[0].burger_id}#</p>
+                                    <div
+                                        className="UserPage_list-items"
+                                    >
+                                        {MapBurgers(burger, index)}
+                                    </div>
+                                    <div
+                                        className="material-symbols-outlined"
+                                        onClick={() => deleteOrder(index, burger[0].burger_id)}>
+                                        delete
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    }
+                </>
             }
             <div className="UserPage_message"></div>
         </div>

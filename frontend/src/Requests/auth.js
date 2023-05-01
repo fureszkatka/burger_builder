@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom" 
 
-
+//Send request to signup user
 export const signup = (userData) => {
     return fetch(`/api/signup`, {
         method: "POST",
@@ -17,6 +17,7 @@ export const signup = (userData) => {
     })
 }
 
+//Send request to login user
 export const login = (user) =>{
     return fetch("/api/login", {
         method: "POST",
@@ -35,6 +36,7 @@ export const login = (user) =>{
     })
 }
 
+//Send request to signout user
 export const signout = (nav) =>{
 
     if(typeof window !== "undefined") localStorage.removeItem("jwt")
