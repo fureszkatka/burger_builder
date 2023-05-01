@@ -5,7 +5,7 @@ var { expressjwt: jwt } = require("express-jwt");
 
 
 //Setup connection to database
-const sequelize = new Sequelize('my_burger', 'root', 'koko', {
+const sequelize = new Sequelize('my_burger', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql'
 });
@@ -28,6 +28,8 @@ const Users = sequelize.define('Users', {
     tableName: "Users", modelName: "Users"
 });
 
+Users.sync();
+
 //Signup user
 exports.signup = async (req, res) => {
 
@@ -35,8 +37,6 @@ exports.signup = async (req, res) => {
         res.status(400).json({ error: res.error })
     }
     else {
-        await sequelize.sync();
-
         const userExists = await Users.findOne({ where: { email: req.body.email } })
         if (userExists) {
             return res.status(403).json({
