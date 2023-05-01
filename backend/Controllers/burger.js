@@ -21,20 +21,20 @@ const Ingredients = sequelize.define('Ingredients', {
         allowNull: false,
     }
 }, {
-    tableName: "Ingredients",modelName:"Ingredients"
+    tableName: "Ingredients", modelName: "Ingredients"
 });
 
 //Define burger id
 let burger_number = 0
 
 //Upload ingredient
-exports.addIngredients = async(req,res) =>{
+exports.addIngredients = async (req, res) => {
 
     await sequelize.sync();
     burger_number += 1
     if (req.body.ingredient.length > 0) {
         for (i = 0; i < req.body.ingredient.length; i++) {
-            
+
             console.log(req.body.ingredient[i])
 
             const ingredient = await Ingredients.create({
@@ -43,7 +43,7 @@ exports.addIngredients = async(req,res) =>{
                 burger_id: burger_number,
             })
         }
-        
+
         return res.status(200).json({
             message: "Burger has been saved!"
         })
@@ -59,20 +59,20 @@ exports.addIngredients = async(req,res) =>{
 
 //Get burgers
 exports.getBurgers = async (req, res) => {
-    
+
     let burgers = await Ingredients.findAll({ where: { belong_to_user: req.params.userId } })
     if (!burgers) {
-        return res.json({error: "No burger was found!"})
+        return res.json({ error: "No burger was found!" })
     }
-    return res.json({ingredients: burgers})
+    return res.json({ ingredients: burgers })
 }
 
 
 //Delete burger by id and owner id
-exports.deleteBurger = async (req, res) => { 
+exports.deleteBurger = async (req, res) => {
 
     let deleteBurger = await Ingredients.destroy({
-        where: { belong_to_user: req.body.userId, burger_id: req.body.burgerId  },
+        where: { belong_to_user: req.body.userId, burger_id: req.body.burgerId },
     });
     return res.json({
         message: `${req.body.burgerId} id burger has been removed!`

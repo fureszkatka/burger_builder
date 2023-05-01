@@ -12,7 +12,7 @@ const sequelize = new Sequelize('my_burger', 'root', 'koko', {
 
 //Define table and rows for databases
 const Users = sequelize.define('Users', {
-   
+
     name: {
         type: Sequelize.DataTypes.STRING,
     },
@@ -23,31 +23,31 @@ const Users = sequelize.define('Users', {
     password: {
         type: Sequelize.DataTypes.STRING,
     }
-    
+
 }, {
-    tableName: "Users",modelName:"Users"
+    tableName: "Users", modelName: "Users"
 });
 
 //Signup user
-exports.signup = async(req,res) =>{
- 
-    if(res.error){
-        res.status(400).json({error:res.error })
+exports.signup = async (req, res) => {
+
+    if (res.error) {
+        res.status(400).json({ error: res.error })
     }
-    else{
+    else {
         await sequelize.sync();
 
         const userExists = await Users.findOne({ where: { email: req.body.email } })
-        if(userExists){
+        if (userExists) {
             return res.status(403).json({
                 error: "Email is taken!"
             })
         }
-        else{
+        else {
             const user = await Users.create({
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.password            
+                password: req.body.password
             })
 
             return res.status(200).json({
@@ -55,7 +55,7 @@ exports.signup = async(req,res) =>{
             })
         }
     }
-    
+
 }
 
 //Login user
@@ -65,7 +65,7 @@ exports.login = async (req, res) => {
 
 
     const userMatch = await Users.findOne({ where: { email: email, password: password } })
-        
+
     if (!userMatch) {
         return res.status(401).json({
             error: "Incorrect email or password!"
@@ -77,16 +77,16 @@ exports.login = async (req, res) => {
 
         res.cookie("burger-token", token, { expire: new Date() + 9999 })
         const { id, name, email } = userMatch
-        console.log("usermatchhhh --->>",userMatch)
+        console.log("usermatchhhh --->>", userMatch)
         return res.json({ token, user: { id, email, name } })
-    }  
+    }
 
 }
 
 //Signout user
-exports.signout = (req,res) =>{
+exports.signout = (req, res) => {
     res.clearCookie("burger-token")
-    return res.json({message: "signout"})
+    return res.json({ message: "signout" })
 }
 
 
@@ -99,10 +99,10 @@ exports.requireSignin = jwt({
 
 //Make profile based on the root parameter 
 exports.userById = (req, res, next, id) => {
-    
-    const user = Users.findOne({ where:{ id: id }})
-    if(user){
-        req.profile = user 
+
+    const user = Users.findOne({ where: { id: id } })
+    if (user) {
+        req.profile = user
         next()
     }
 }

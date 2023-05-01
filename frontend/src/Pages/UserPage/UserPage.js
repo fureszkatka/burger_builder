@@ -1,8 +1,8 @@
 import React from "react";
 import { isAuthenticated } from "../../Auth";
 import { useSelector, useDispatch } from 'react-redux'
-import { list, delOrder, loading} from '../../stores/user-store'
-import { getAllBurgers,delBurger } from "../../Requests/burger"
+import { list, delOrder, loading } from '../../stores/user-store'
+import { getAllBurgers, delBurger } from "../../Requests/burger"
 import { useEffect, useState } from "react";
 import "./UserPage.styl"
 
@@ -21,37 +21,38 @@ export const UserPage = () => {
         dispatch(loading(true))
 
         getAllBurgers(userId)
-        .then(data => {
+            .then(data => {
 
-            let refakt_burger = []
-            let n = data.ingredients[0].burger_id
-            let i = 0
-            let row = []
-        
-            while (i < data.ingredients.length) {
-                if(data.ingredients[i].burger_id == n)  {
-                    row.push(data.ingredients[i])
-                    i++
-                }else{
-                n = data.ingredients[i].burger_id
+                let refakt_burger = []
+                let n = data.ingredients[0].burger_id
+                let i = 0
+                let row = []
+
+                while (i < data.ingredients.length) {
+                    if (data.ingredients[i].burger_id == n) {
+                        row.push(data.ingredients[i])
+                        i++
+                    } else {
+                        n = data.ingredients[i].burger_id
+                        refakt_burger.push(row)
+                        row = []
+                    }
+                }
                 refakt_burger.push(row)
-                row = []}
-            }
-            refakt_burger.push(row)
 
-            dispatch(loading(false))
-            dispatch(list(refakt_burger))
-        })
+                dispatch(loading(false))
+                dispatch(list(refakt_burger))
+            })
 
 
-    },[])
+    }, [])
 
     //Mapping a 2d array
-    const MapBurgers = (item,i) => {
-        
+    const MapBurgers = (item, i) => {
+
         return (
             <>
-                {item.map((burger,index) =>
+                {item.map((burger, index) =>
                     <div key={index} className="UserPage_list-element">
                         {burger.ingredient}
                     </div>
@@ -62,16 +63,16 @@ export const UserPage = () => {
 
 
     //Handle deleting a burger by id
-    const deleteOrder = (i,index)=> {
-        
+    const deleteOrder = (i, index) => {
+
         delBurger(isAuthenticated().user.id, index)
-        .then(data => {
-            dispatch(delOrder(i,data.message))
-        })
+            .then(data => {
+                dispatch(delOrder(i, data.message))
+            })
     }
 
-    
-    return(
+
+    return (
         <div className="UserPage_container">
             {Burgers.isLoading ?
                 <img
@@ -84,7 +85,7 @@ export const UserPage = () => {
                         <div className="UserPage_burgers-list">
                             {Burgers.ingredients.map((burger, index) => (
                                 <div key={index} className="UserPage_button-burgers">
-                            
+
                                     <p className="UserPage_index">
                                         {burger[0].burger_id}#</p>
                                     <div
