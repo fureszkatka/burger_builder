@@ -32,13 +32,17 @@ export const LoginUser = () => {
         }
         login(user)
         .then(data =>{
-            if(data.error) {
+            if (data.error) {
+                dispatch(loading(false))
+                console.log("error")
                 dispatch(clearing(data.error))
+                
             }
             else {
-                authenticate (data)
-                dispatch(clearing(data.message))
                 dispatch(loading(false))
+                console.log("error")
+                authenticate(data)
+                dispatch(clearing(data.message))
             }
         })
 
@@ -54,7 +58,7 @@ export const LoginUser = () => {
     return (
         <div className="Login_container">
             {isAuthenticated() ?  
-                (Login.isLoading && (<Navigate to={`/user/${isAuthenticated().user.id}`} />) )
+                (Login.isLoggedin && (<Navigate to={`/user/${isAuthenticated().user.id}`} />) )
                 :
                 <p></p>
             }
@@ -95,7 +99,7 @@ export const LoginUser = () => {
                     <button className="Login_button" onClick={Upload}>
                         Login
                     </button>
-                    {Login.isLoggedin ?
+                    {Login.isLoading ?
                         <img
                             src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/04de2e31234507.564a1d23645bf.gif"
                         >

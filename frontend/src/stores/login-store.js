@@ -2,8 +2,8 @@ import { createSlice,  } from '@reduxjs/toolkit'
 
 let initialState = {
     userData: {
-        password: "kiki12",
-        email: "kati@gmail.com",
+        password: "",
+        email: "",
         message: "",
         isLoggedin: false,
         isLoading: false

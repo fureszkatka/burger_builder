@@ -22,25 +22,31 @@ export const UserPage = () => {
 
         getAllBurgers(userId)
         .then(data => {
-
-            let refakt_burger = []
-            let n = data.ingredients[0].burger_id
-            let i = 0
-            let row = []
-        
-            while (i < data.ingredients.length) {
-                if(data.ingredients[i].burger_id == n)  {
-                    row.push(data.ingredients[i])
-                    i++
-                }else{
-                n = data.ingredients[i].burger_id
+            if (data.ingredients.length == 0) {
+                console.log("error")
+                dispatch(loading(false))
+            }    
+            else {
+                console.log("Data")
+                let refakt_burger = []
+                let n = data.ingredients[0].burger_id
+                let i = 0
+                let row = []
+            
+                while (i < data.ingredients.length) {
+                    if(data.ingredients[i].burger_id == n)  {
+                        row.push(data.ingredients[i])
+                        i++
+                    }else{
+                    n = data.ingredients[i].burger_id
+                    refakt_burger.push(row)
+                    row = []}
+                }
                 refakt_burger.push(row)
-                row = []}
-            }
-            refakt_burger.push(row)
 
-            dispatch(loading(false))
-            dispatch(list(refakt_burger))
+                dispatch(loading(false))
+                dispatch(list(refakt_burger))   
+            }
         })
 
 
@@ -80,7 +86,7 @@ export const UserPage = () => {
                 </img>
                 :
                 <>
-                    {Burgers.ingredients &&
+                    {Burgers.ingredients ?
                         <div className="UserPage_burgers-list">
                             {Burgers.ingredients.map((burger, index) => (
                                 <div key={index} className="UserPage_button-burgers">
@@ -100,6 +106,8 @@ export const UserPage = () => {
                                 </div>
                             ))}
                         </div>
+                        :
+                        <div className="UserPage_noBurger">You don't have any burgers yet! You can make one by clicking the Order menu!</div>
                     }
                 </>
             }

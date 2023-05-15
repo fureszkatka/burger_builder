@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize")
 
 //Make connection with database
-const sequelize = new Sequelize('my_burger', 'root', 'koko', {
+const sequelize = new Sequelize('my_burger', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql'
 });
@@ -24,19 +24,31 @@ const Ingredients = sequelize.define('Ingredients', {
     tableName: "Ingredients",modelName:"Ingredients"
 });
 
-//Define burger id
-let burger_number = 0
+Ingredients.sync();
 
 //Upload ingredient
 exports.addIngredients = async(req,res) =>{
 
-    await sequelize.sync();
-    burger_number += 1
+    let burger_number = await Ingredients.findAll({ where: { belong_to_user: req.body.userId } })
+
+    if (burger_number.length > 0) {
+        let n = parseInt(burger_number[0].burger_id)
+        for (i = 0; i < burger_number.length; i++){
+            if (parseInt(burger_number[i].burger_id)) {
+                n = parseInt(burger_number[i].burger_id)
+            }
+        }
+        burger_number = n
+    } else {
+        burger_number = 1
+    }
+
     if (req.body.ingredient.length > 0) {
+
+        burger_number += 1
+
         for (i = 0; i < req.body.ingredient.length; i++) {
             
-            console.log(req.body.ingredient[i])
-
             const ingredient = await Ingredients.create({
                 belong_to_user: req.body.userId,
                 ingredient: req.body.ingredient[i],
